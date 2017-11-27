@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-mobile-printer"
+    version="1.0.0">
+
+    <name>CordovaMobilePrinterBluetooth</name>
+	<description>A Cordova/Phonegap driver for Mobile printers chinese</description>
+    <license>Apache</license>
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>    
+
+    <js-module src="www/mobileprinter.js" name="CordovaMobilePrinterBluetooth">
+        <clobbers target="cordova.plugins.mobileprinter" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.BLUETOOTH" />
+        </config-file>
+
+    	<source-file src="src/android/cordova/mobile/printer/CordovaMobilePrinterBluetooth.java" target-dir="src/android/cordova/mobile/printer" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="CordovaMobilePrinterBluetooth">
+                <param name="android-package" value="cordova.mobile.printer.CordovaMobilePrinterBluetooth" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/RT_Android_Bluetooth_SDK_20150204.jar" target-dir="libs"/>
+    </platform>
+</plugin>
