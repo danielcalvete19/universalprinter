@@ -1,0 +1,11 @@
+{
+  "name": "universalprinter",
+  "version": "1.0.0",
+  "cordova": {
+    "id": "universalprinter",
+    "platforms": [
+      "android"
+    ]
+  },
+  "description": "A starting point for a Cordova Plugin Printer"
+}
