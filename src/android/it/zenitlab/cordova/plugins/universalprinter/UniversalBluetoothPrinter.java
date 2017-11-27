@@ -69,12 +69,12 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
 
                         if (BluetoothPrintDriver.OpenPrinter(mac)) {
 
-                            mChatService = new BluetoothPrintDriver(this, mHandler);
+                            //mChatService = new BluetoothPrintDriver(this, mHandler);
 
                             // Get the BLuetoothDevice object
-                            BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mac);
+                            //BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mac);
                             // Attempt to connect to the device
-                            mChatService.connect(device);
+                            //mChatService.connect(device);
 
                             if(BluetoothPrintDriver.IsNoConnection()){
                                 return;
@@ -143,76 +143,73 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
     }
 
     // The Handler that gets information back from the BluetoothChatService
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-            case MESSAGE_STATE_CHANGE:
-                switch (msg.arg1) {
-                case BluetoothPrintDriver.STATE_CONNECTED:
-                    break;
-                case BluetoothPrintDriver.STATE_CONNECTING:
-                    break;
-                case BluetoothPrintDriver.STATE_LISTEN:
-                case BluetoothPrintDriver.STATE_NONE:
-                    break;
-                }
-                break;
-            case MESSAGE_WRITE:
-                break;
-            case MESSAGE_READ:
-                String ErrorMsg = null;
-                byte[] readBuf = (byte[]) msg.obj;
-                float Voltage = 0;
-                if(D) Log.i(TAG, "readBuf[0]:"+readBuf[0]+"  readBuf[1]:"+readBuf[1]+"  readBuf[2]:"+readBuf[2]);
-                if(readBuf[2]==0)
-                    ErrorMsg = "NO ERROR!         ";
-                else
-                {
-                    if((readBuf[2] & 0x02) != 0)
-                        ErrorMsg = "ERROR: No printer connected!";
-                    if((readBuf[2] & 0x04) != 0)
-                        ErrorMsg = "ERROR: No paper!  ";
-                    if((readBuf[2] & 0x08) != 0)
-                        ErrorMsg = "ERROR: Voltage is too low!  ";
-                    if((readBuf[2] & 0x40) != 0)
-                        ErrorMsg = "ERROR: Printer Over Heat!  ";
-                }
-                Voltage = (float) ((readBuf[0]*256 + readBuf[1])/10.0);
-                //if(D) Log.i(TAG, "Voltage: "+Voltage);
-                DisplayToast(ErrorMsg+"                                        "+"Battery voltage£º"+Voltage+" V");
+    // private final Handler mHandler = new Handler() {
+    //     @Override
+    //     public void handleMessage(Message msg) {
+    //         switch (msg.what) {
+    //         case MESSAGE_STATE_CHANGE:
+    //             switch (msg.arg1) {
+    //             case BluetoothPrintDriver.STATE_CONNECTED:
+    //                 break;
+    //             case BluetoothPrintDriver.STATE_CONNECTING:
+    //                 break;
+    //             case BluetoothPrintDriver.STATE_LISTEN:
+    //             case BluetoothPrintDriver.STATE_NONE:
+    //                 break;
+    //             }
+    //             break;
+    //         case MESSAGE_WRITE:
+    //             break;
+    //         case MESSAGE_READ:
+    //             String ErrorMsg = null;
+    //             byte[] readBuf = (byte[]) msg.obj;
+    //             float Voltage = 0;
+    //             if(D) Log.i(TAG, "readBuf[0]:"+readBuf[0]+"  readBuf[1]:"+readBuf[1]+"  readBuf[2]:"+readBuf[2]);
+    //             if(readBuf[2]==0)
+    //                 ErrorMsg = "NO ERROR!         ";
+    //             else
+    //             {
+    //                 if((readBuf[2] & 0x02) != 0)
+    //                     ErrorMsg = "ERROR: No printer connected!";
+    //                 if((readBuf[2] & 0x04) != 0)
+    //                     ErrorMsg = "ERROR: No paper!  ";
+    //                 if((readBuf[2] & 0x08) != 0)
+    //                     ErrorMsg = "ERROR: Voltage is too low!  ";
+    //                 if((readBuf[2] & 0x40) != 0)
+    //                     ErrorMsg = "ERROR: Printer Over Heat!  ";
+    //             }
+    //             Voltage = (float) ((readBuf[0]*256 + readBuf[1])/10.0);
+    //             //if(D) Log.i(TAG, "Voltage: "+Voltage);
+    //             //throw new ConnectionException("Cannot Print because the printer is paused.");
+    //             break;
+    //         case MESSAGE_DEVICE_NAME:
+    //             // save the connected device's name
+    //             break;
+    //         case MESSAGE_TOAST:
+    //             break;
+    //         }
+    //     }
+    // };
 
-                //throw new ConnectionException("Cannot Print because the printer is paused.");
-
-                break;
-            case MESSAGE_DEVICE_NAME:
-                // save the connected device's name
-                break;
-            case MESSAGE_TOAST:
-                break;
-            }
-        }
-    };
-
-    private Boolean isPrinterReady(Connection connection) throws ConnectionException, ZebraPrinterLanguageUnknownException {
-        Boolean isOK = false;
-        connection.open();
-        // Creates a ZebraPrinter object to use Zebra specific functionality like getCurrentStatus()
-        ZebraPrinter printer = ZebraPrinterFactory.getInstance(connection);
-        PrinterStatus printerStatus = printer.getCurrentStatus();
-        if (printerStatus.isReadyToPrint) {
-            isOK = true;
-        } else if (printerStatus.isPaused) {
-            throw new ConnectionException("Cannot Print because the printer is paused.");
-        } else if (printerStatus.isHeadOpen) {
-            throw new ConnectionException("Cannot Print because the printer media door is open.");
-        } else if (printerStatus.isPaperOut) {
-            throw new ConnectionException("Cannot Print because the paper is out.");
-        } else {
-            throw new ConnectionException("Cannot Print.");
-        }
-        return isOK;
-    }
+    // private Boolean isPrinterReady(Connection connection) throws ConnectionException, ZebraPrinterLanguageUnknownException {
+    //     Boolean isOK = false;
+    //     connection.open();
+    //     // Creates a ZebraPrinter object to use Zebra specific functionality like getCurrentStatus()
+    //     ZebraPrinter printer = ZebraPrinterFactory.getInstance(connection);
+    //     PrinterStatus printerStatus = printer.getCurrentStatus();
+    //     if (printerStatus.isReadyToPrint) {
+    //         isOK = true;
+    //     } else if (printerStatus.isPaused) {
+    //         throw new ConnectionException("Cannot Print because the printer is paused.");
+    //     } else if (printerStatus.isHeadOpen) {
+    //         throw new ConnectionException("Cannot Print because the printer media door is open.");
+    //     } else if (printerStatus.isPaperOut) {
+    //         throw new ConnectionException("Cannot Print because the paper is out.");
+    //     } else {
+    //         throw new ConnectionException("Cannot Print.");
+    //     }
+    //     return isOK;
+    // }
 
     // private void print (String msg, CallbackContext callbackContext) {
 
