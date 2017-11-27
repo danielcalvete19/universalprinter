@@ -31,7 +31,7 @@
 
         <source-file src="src/android/it/zenitlab/cordova/plugins/universalprinter/UniversalBluetoothPrinter.java" target-dir="src/android/it/zenitlab/cordova/plugins/universalprinter" />
 
-        <source-file src="src/android/RT_Android_Bluetooth_SDK_20150204.jar" target-dir="libs"/>
+        <source-file src="src/android/RT_Android_Bluetooth_SDK.jar" target-dir="libs"/>
 
     </platform>
 </plugin>

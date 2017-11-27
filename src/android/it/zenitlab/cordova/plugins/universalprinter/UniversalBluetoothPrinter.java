@@ -12,6 +12,7 @@ import android.util.Log;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.Handler;
+import android.os.Message;
 /*import com.zebra.sdk.comm.BluetoothConnectionInsecure;
 import com.zebra.sdk.comm.Connection;
 import com.zebra.sdk.comm.ConnectionException;
@@ -68,31 +69,54 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                         callbackContext.error("Bluetooth is not available");
                     }else{
 
-                        mChatService = new BluetoothPrintDriver(this, mHandler);
+                        if (BluetoothPrintDriver.OpenPrinter(mac)) 
+                        {
+                            if(BluetoothPrintDriver.IsNoConnection()){
+                                callbackContext.success("no je pudo");
+                            }else{
+                                BluetoothPrintDriver.Begin();
+                                String tmpString = "Rafadev";
+                                BluetoothPrintDriver.ImportData(tmpString);
+                                BluetoothPrintDriver.ImportData("\r");
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
 
-                        // Get the BLuetoothDevice object
-                        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mac);
-                        // Attempt to connect to the device
-                        mChatService.connect(device);
-
-                        if(BluetoothPrintDriver.IsNoConnection()){
-                            return;
-                        }else{
-                            //BluetoothPrintDriver.StatusInquiry();
-                            BluetoothPrintDriver.Begin();
-
-                            String tmpContent = msg;
-
-                            BluetoothPrintDriver.BT_Write(tmpContent);
-                            BluetoothPrintDriver.BT_Write("\r");
-
-                            BluetoothPrintDriver.LF();
-                            BluetoothPrintDriver.LF();
-
-                            Thread.sleep(500);
-                            callbackContext.success("Stampa terminata");
+                                Thread.sleep(500);
+                                callbackContext.success("Stampa terminata");
+                            }
 
                         }
+                        else 
+                        {
+                            callbackContext.error("Could not connect to " + mac);
+                        }
+                        // mChatService = new BluetoothPrintDriver(this, mHandler);
+
+                        // // Get the BLuetoothDevice object
+                        // BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mac);
+                        // // Attempt to connect to the device
+                        // mChatService.connect(device);
+
+                        // if(BluetoothPrintDriver.IsNoConnection()){
+                        //     return;
+                        // }else{
+                        //     //BluetoothPrintDriver.StatusInquiry();
+                        //     BluetoothPrintDriver.Begin();
+
+                        //     String tmpContent = msg;
+
+                        //     BluetoothPrintDriver.BT_Write(tmpContent);
+                        //     BluetoothPrintDriver.BT_Write("\r");
+
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.LF();
+
+                        //     Thread.sleep(500);
+                        //     callbackContext.success("Stampa terminata");
+
+                        // }
 
                         
                     }                    
@@ -134,53 +158,53 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
     }
 
     //The Handler that gets information back from the BluetoothChatService
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-            case MESSAGE_STATE_CHANGE:
-                switch (msg.arg1) {
-                case BluetoothPrintDriver.STATE_CONNECTED:
-                    break;
-                case BluetoothPrintDriver.STATE_CONNECTING:
-                    break;
-                case BluetoothPrintDriver.STATE_LISTEN:
-                case BluetoothPrintDriver.STATE_NONE:
-                    break;
-                }
-                break;
-            case MESSAGE_WRITE:
-                break;
-            case MESSAGE_READ:
-                String ErrorMsg = null;
-                byte[] readBuf = (byte[]) msg.obj;
-                float Voltage = 0;
-                if(D) Log.i(TAG, "readBuf[0]:"+readBuf[0]+"  readBuf[1]:"+readBuf[1]+"  readBuf[2]:"+readBuf[2]);
-                if(readBuf[2]==0)
-                    ErrorMsg = "NO ERROR!         ";
-                else
-                {
-                    if((readBuf[2] & 0x02) != 0)
-                        ErrorMsg = "ERROR: No printer connected!";
-                    if((readBuf[2] & 0x04) != 0)
-                        ErrorMsg = "ERROR: No paper!  ";
-                    if((readBuf[2] & 0x08) != 0)
-                        ErrorMsg = "ERROR: Voltage is too low!  ";
-                    if((readBuf[2] & 0x40) != 0)
-                        ErrorMsg = "ERROR: Printer Over Heat!  ";
-                }
-                Voltage = (float) ((readBuf[0]*256 + readBuf[1])/10.0);
-                //if(D) Log.i(TAG, "Voltage: "+Voltage);
-                //throw new ConnectionException("Cannot Print because the printer is paused.");
-                break;
-            case MESSAGE_DEVICE_NAME:
-                // save the connected device's name
-                break;
-            case MESSAGE_TOAST:
-                break;
-            }
-        }
-    };
+    // private final Handler mHandler = new Handler() {
+    //     @Override
+    //     public void handleMessage(Message msg) {
+    //         switch (msg.what) {
+    //         case MESSAGE_STATE_CHANGE:
+    //             switch (msg.arg1) {
+    //             case BluetoothPrintDriver.STATE_CONNECTED:
+    //                 break;
+    //             case BluetoothPrintDriver.STATE_CONNECTING:
+    //                 break;
+    //             case BluetoothPrintDriver.STATE_LISTEN:
+    //             case BluetoothPrintDriver.STATE_NONE:
+    //                 break;
+    //             }
+    //             break;
+    //         case MESSAGE_WRITE:
+    //             break;
+    //         case MESSAGE_READ:
+    //             String ErrorMsg = null;
+    //             byte[] readBuf = (byte[]) msg.obj;
+    //             float Voltage = 0;
+    //             if(D) Log.i(TAG, "readBuf[0]:"+readBuf[0]+"  readBuf[1]:"+readBuf[1]+"  readBuf[2]:"+readBuf[2]);
+    //             if(readBuf[2]==0)
+    //                 ErrorMsg = "NO ERROR!         ";
+    //             else
+    //             {
+    //                 if((readBuf[2] & 0x02) != 0)
+    //                     ErrorMsg = "ERROR: No printer connected!";
+    //                 if((readBuf[2] & 0x04) != 0)
+    //                     ErrorMsg = "ERROR: No paper!  ";
+    //                 if((readBuf[2] & 0x08) != 0)
+    //                     ErrorMsg = "ERROR: Voltage is too low!  ";
+    //                 if((readBuf[2] & 0x40) != 0)
+    //                     ErrorMsg = "ERROR: Printer Over Heat!  ";
+    //             }
+    //             Voltage = (float) ((readBuf[0]*256 + readBuf[1])/10.0);
+    //             //if(D) Log.i(TAG, "Voltage: "+Voltage);
+    //             //throw new ConnectionException("Cannot Print because the printer is paused.");
+    //             break;
+    //         case MESSAGE_DEVICE_NAME:
+    //             // save the connected device's name
+    //             break;
+    //         case MESSAGE_TOAST:
+    //             break;
+    //         }
+    //     }
+    // };
 
     // private Boolean isPrinterReady(Connection connection) throws ConnectionException, ZebraPrinterLanguageUnknownException {
     //     Boolean isOK = false;
