@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="cordova-mobile-printer"
-    version="1.0.0">
+    id="it.zenitlab.cordova.plugins.universalprinter"
+    version="1.0">
 
-    <name>CordovaMobilePrinterBluetooth</name>
-	<description>A Cordova/Phonegap driver for Mobile printers chinese</description>
+    <name>UniversalBluetoothPrinter</name>
+    <description>A Cordova/Phonegap driver for universal bluetooth printers</description>
     <license>Apache</license>
     <engines>
         <engine name="cordova" version=">=3.0.0" />
-    </engines>    
-
-    <js-module src="www/mobileprinter.js" name="CordovaMobilePrinterBluetooth">
-        <clobbers target="cordova.plugins.mobileprinter" />
-    </js-module>
+    </engines>
 
     <!-- android -->
     <platform name="android">
+        <js-module src="www/universalprinter.js" name="UniversalBluetoothPrinter">
+            <clobbers target="cordova.plugins.universalprinter" />
+        </js-module>
 
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.BLUETOOTH" />
         </config-file>
-
-    	<source-file src="src/android/cordova/mobile/printer/CordovaMobilePrinterBluetooth.java" target-dir="src/android/cordova/mobile/printer" />
-
+      
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="CordovaMobilePrinterBluetooth">
-                <param name="android-package" value="cordova.mobile.printer.CordovaMobilePrinterBluetooth" />
+            <feature name="UniversalBluetoothPrinter">
+                <param name="android-package" value="it.zenitlab.cordova.plugins.universalprinter.UniversalBluetoothPrinter" />
             </feature>
         </config-file>
 
+        <source-file src="src/android/it/zenitlab/cordova/plugins/universalprinter/UniversalBluetoothPrinter.java" target-dir="src/android/it/zenitlab/cordova/plugins/universalprinter" />
+
         <source-file src="src/android/RT_Android_Bluetooth_SDK_20150204.jar" target-dir="libs"/>
+
     </platform>
 </plugin>

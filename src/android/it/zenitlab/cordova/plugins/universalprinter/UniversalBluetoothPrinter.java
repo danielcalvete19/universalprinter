@@ -19,9 +19,9 @@ import com.zebra.sdk.printer.ZebraPrinter;
 import com.zebra.sdk.printer.ZebraPrinterFactory;
 import com.zebra.sdk.printer.ZebraPrinterLanguageUnknownException;*/
 
-public class CordovaMobilePrinterBluetooth extends CordovaPlugin {
+public class UniversalBluetoothPrinter extends CordovaPlugin {
 
-    private static final String LOG_TAG = "CordovaMobilePrinterBluetooth";
+    private static final String LOG_TAG = "UniversalBluetoothPrinter";
     // Name of the connected device
     private String mConnectedDeviceName = null;
     // Local Bluetooth adapter
@@ -29,7 +29,7 @@ public class CordovaMobilePrinterBluetooth extends CordovaPlugin {
     // Member object for the chat services
     private BluetoothPrintDriver mChatService = null;
 
-    public CordovaMobilePrinterBluetooth() {
+    public UniversalBluetoothPrinter() {
     }
 
     @Override
