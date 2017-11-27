@@ -1,4 +1,4 @@
-package cordova.mobile.printer;
+package it.zenitlab.cordova.plugins.universalprinter;
 
 import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
 
