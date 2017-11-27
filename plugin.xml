@@ -3,10 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="it.zenitlab.cordova.plugins.universalprinter"
     version="1.0">
-
     <name>UniversalBluetoothPrinter</name>
     <description>A Cordova/Phonegap driver for universal bluetooth printers</description>
     <license>Apache</license>
+    <keywords>Ionic,bluetoothPrinter</keywords>
+    <repo>https://github.com/danielcalvete19/universalprinter.git</repo>
+    <issue>https://github.com/danielcalvete19/universalprinter/issues</issue>
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
