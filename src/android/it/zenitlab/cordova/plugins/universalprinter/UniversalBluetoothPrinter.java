@@ -94,7 +94,7 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.ClearData();
                                 BluetoothPrintDriver.AddAlignMode((byte)1);
                                 BluetoothPrintDriver.SetLineSpace((byte)20);    
-                                BluetoothPrintDriver.SetZoom((byte)0x10);        
+                                BluetoothPrintDriver.SetZoom((byte)0x01);        
                                 BluetoothPrintDriver.ImportData(summaryOrder.getString("NombreEmpresa"));
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
@@ -196,14 +196,63 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
 
                                 for (int i=0; i < arrayProducts.length(); i++) {
                                     product = arrayProducts.getJSONObject(i);
-                                    BluetoothPrintDriver.ImportData(product.getString("nombre"));
+                                    BluetoothPrintDriver.ImportData("Item: " + product.getString("nombre"));
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData("Cod: " + product.getString("codigo") + " U.M.: " + product.getString("medida") + "");
+
+                                    BluetoothPrintDriver.ImportData("Vr.Und: " + product.getString("precioUnitario") + " Total: " + product.getString("subtotal"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(lineaDelgada);
                                 }
+
+                                BluetoothPrintDriver.ImportData("SUBTOTAL: " + summaryCart.getString("subtotal"));
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData("VALOR TOTAL: " + summaryCart.getString("valortotal"));
+
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+
+
+                                BluetoothPrintDriver.AddAlignMode((byte)1); 
+                                BluetoothPrintDriver.ImportData("INFORMACION DE DESPACHO");
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.AddAlignMode((byte)0);
+                                BluetoothPrintDriver.ImportData("Direccion: " + summaryShipping.getString("direccion"));
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData("Telefono: " + summaryShipping.getString("telefono"));
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData("Ciudad: " + summaryShipping.getString("ciudad")); 
 
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
