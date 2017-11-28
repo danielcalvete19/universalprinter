@@ -182,12 +182,16 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 JSONArray arrayProducts = new JSONArray();
                                 JSONObject product, summaryCart, summaryShipping = new JSONObject();
 
-                                arrayProducts = textPrint.getJSONArray(10);
-                                summaryCart = textPrint.getJSONObject(11);
-                                summaryShipping = textPrint.getJSONObject(12);
+                                arrayProducts = textPrint.getJSONArray(11);
+                                summaryCart = textPrint.getJSONObject(12);
+                                summaryShipping = textPrint.getJSONObject(13);
 
                                 for (int i=0; i < arrayProducts.length(); i++) {
                                     product = arrayProducts.getJSONObject(i);
+                                    BluetoothPrintDriver.ImportData(product.get("nombre"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
                                 }
 
                                 BluetoothPrintDriver.LF();
