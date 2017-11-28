@@ -67,11 +67,87 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                             if(BluetoothPrintDriver.IsNoConnection()){
                                 callbackContext.success("Could not connect to " + mac);
                             }else{
+                                // BluetoothPrintDriver.Begin();
+                                // String tmpString = msg;
+                                // BluetoothPrintDriver.ImportData(tmpString);
+                                // BluetoothPrintDriver.ImportData("\r");
+                                // BluetoothPrintDriver.LF();
+                                // BluetoothPrintDriver.LF();
+                                // BluetoothPrintDriver.excute();
+                                // BluetoothPrintDriver.ClearData();
+
                                 BluetoothPrintDriver.Begin();
-                                String tmpString = msg;
-                                BluetoothPrintDriver.ImportData(tmpString);
-                                BluetoothPrintDriver.ImportData("\r");
                                 BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.AddAlignMode((byte)1);
+                                BluetoothPrintDriver.SetLineSpace((byte)50);    
+                                BluetoothPrintDriver.SetZoom((byte)0x11);        
+                                BluetoothPrintDriver.ImportData('GRUPO GIRALDO SAS');
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+
+                                BluetoothPrintDriver.AddAlignMode((byte)0);       
+                                BluetoothPrintDriver.SetZoom((byte)0x00);
+                                BluetoothPrintDriver.ImportData('Nit: 900.338.568-8');
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData('Tel: (572) 4471825 / (572) 6684493');
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData('Dire: Cra 5 Norte # 46BN - 31, Cali');
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData('Vendedor: VENDEDOR GENERAL -');
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData('--------------------------------');
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData('Fecha: 2017-10-06 11:59');
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData('Tercero/Cliente: BASTO FABIAN');
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData('Nit/Cedula: 14622384');
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData('Medio de Pago: Efectivo - Contra Entrega');
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData('--------------------------------');
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
@@ -85,9 +161,34 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                         {
                             callbackContext.error("Could not connect to " + mac);
                         }
+                        // mChatService = new BluetoothPrintDriver(this, mHandler);
+
+                        // // Get the BLuetoothDevice object
+                        // BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mac);
+                        // // Attempt to connect to the device
+                        // mChatService.connect(device);
+
+                        // if(BluetoothPrintDriver.IsNoConnection()){
+                        //     return;
+                        // }else{
+                        //     //BluetoothPrintDriver.StatusInquiry();
+                        //     BluetoothPrintDriver.Begin();
+
+                        //     String tmpContent = msg;
+
+                        //     BluetoothPrintDriver.BT_Write(tmpContent);
+                        //     BluetoothPrintDriver.BT_Write("\r");
+
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.LF();
+
+                        //     Thread.sleep(500);
+                        //     callbackContext.success("Stampa terminata");
+
+                        // }
 
                         
-                    }     
+                    }                    
 
                 } catch (Exception e) {
                     // Handle communications error here.
@@ -96,5 +197,6 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
             }
         }).start();
     }
+
 }
 
