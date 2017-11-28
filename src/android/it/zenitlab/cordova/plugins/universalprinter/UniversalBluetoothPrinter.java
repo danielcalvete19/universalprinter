@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.JSONException;
 import android.util.Log;
 import android.bluetooth.BluetoothAdapter;
@@ -33,8 +34,8 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
         if (action.equals("print")) {
             try {
                 String mac = args.getString(0);
-                String msg = args.getString(1);
-                sendData(callbackContext, mac, msg);
+                String textPrint = args.getJSONArray(1);
+                sendData(callbackContext, mac, textPrint);
             } catch (IOException e) {
                 Log.e(LOG_TAG, e.getMessage());
                 e.printStackTrace();
@@ -47,7 +48,7 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
     /*
      * This will send data to be printed by the bluetooth printer
      */
-    void sendData(final CallbackContext callbackContext, final String mac, final String msg) throws IOException {
+    void sendData(final CallbackContext callbackContext, final String mac, final JSONArray textPrint) throws IOException {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -75,16 +76,18 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 // BluetoothPrintDriver.excute();
                                 // BluetoothPrintDriver.ClearData();
 
-                                String tmpString1 = "GRUPO GIRALDO SAS";
-                                String tmpString2 = "Nit: 900.338.568-8";
-                                String tmpString3 = "Tel: (572)4471825 /(572)6684493";
-                                String tmpString4 = "Dir: Cra 5 Nrt # 46BN-31, Cali";
-                                String tmpString5 = "Vendedor: VENDEDOR GENERAL -";
-                                String tmpString6 = "Fecha: 2017-10-06 11:59";
-                                String tmpString7 = "Tercero/Cliente: BASTO FABIAN";
-                                String tmpString8 = "Nit/Cedula: 14622384";
-                                String tmpString9 = "Medio de Pago: Efectivo - Contra Entrega";
-                                String tmpString12 = "--------------------------------";
+                                String NombreEmpresa = "GRUPO GIRALDO SAS";
+                                String Nit = "Nit: 900.338.568-8";
+                                String Telefonos = "Tel: (572)4471825 /(572)6684493";
+                                String Direccion = "Dir: Cra 5 Nrt # 46 BN-31, Cali";
+                                String VendedorNombre = "Vendedor: VENDEDOR GENERAL -";
+                                String Fecha = "Fecha: 2017-10-06 11:59";
+                                String Tercero = "Tercero/Cliente: BASTO FABIAN";
+                                String TerceroNit = "Nit/Cedula: 14622384";
+                                String MedioPago = "Medio de Pago: Efectivo - Contra Entrega";
+                                String Contacto = "Contacto: Fabian contacto";
+
+                                String lineaDelgada = "--------------------------------";
 
                                 BluetoothPrintDriver.Begin();
                                 BluetoothPrintDriver.LF();
@@ -95,8 +98,8 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.ClearData();
                                 BluetoothPrintDriver.AddAlignMode((byte)1);
                                 BluetoothPrintDriver.SetLineSpace((byte)30);    
-                                BluetoothPrintDriver.SetZoom((byte)0x10);        
-                                BluetoothPrintDriver.ImportData(tmpString1);
+                                BluetoothPrintDriver.SetZoom((byte)0x7);        
+                                BluetoothPrintDriver.ImportData(NombreEmpresa);
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
 
@@ -112,46 +115,81 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
 
                                 BluetoothPrintDriver.AddAlignMode((byte)0);       
                                 BluetoothPrintDriver.SetZoom((byte)0x00);
-                                BluetoothPrintDriver.ImportData(tmpString2);
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(tmpString3);
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(tmpString4);
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(tmpString5);
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(tmpString12);
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(tmpString6);
+                                BluetoothPrintDriver.ImportData(Nit);
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(tmpString7);
+                                BluetoothPrintDriver.ImportData(Telefonos);
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(tmpString8);
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(tmpString9);
+                                BluetoothPrintDriver.ImportData(Direccion);
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(tmpString12);
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData(VendedorNombre);
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData(lineaDelgada);
+
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData(Fecha);
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData(Tercero);
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData(TerceroNit);
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData(MedioPago);
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData(Contacto);
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData(lineaDelgada);
+
+                                JSONArray arrayProducts = new JSONArray();
+                                JSONObject product, summaryCart, summaryShipping = new JSONObject();
+
+                                arrayProducts = textPrint.getJSONArray(10);
+                                summaryCart = textPrint.getJSONObject(11);
+                                summaryShipping = textPrint.getJSONObject(12);
+
+                                for (int i=0; i < arrayProducts.length(); i++) {
+                                    product = arrayProducts.getJSONObject(i);
+                                }
+
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
