@@ -62,10 +62,9 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                         callbackContext.error("Bluetooth is not available");
                     }else{
 
-                        if (BluetoothPrintDriver.OpenPrinter(mac)) 
-                        {
+                        if (BluetoothPrintDriver.OpenPrinter(mac)){
                             if(BluetoothPrintDriver.IsNoConnection()){
-                                callbackContext.success("Could not connect to " + mac);
+                                callbackContext.error("Could not connect to " + mac);
                             }else{
                                 // BluetoothPrintDriver.Begin();
                                 // String tmpString = msg;
@@ -96,7 +95,7 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.ClearData();
                                 BluetoothPrintDriver.AddAlignMode((byte)1);
                                 BluetoothPrintDriver.SetLineSpace((byte)50);    
-                                BluetoothPrintDriver.SetZoom((byte)0x11);        
+                                BluetoothPrintDriver.SetZoom((byte)0x05);        
                                 BluetoothPrintDriver.ImportData(tmpString1);
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
@@ -163,6 +162,8 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
 
+                                BluetoothPrintDriver.close();
+
                                 Thread.sleep(500);
                                 callbackContext.success("Printed correctly");
                             }
@@ -172,26 +173,66 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                         {
                             callbackContext.error("Could not connect to " + mac);
                         }
-                        // mChatService = new BluetoothPrintDriver(this, mHandler);
 
-                        // // Get the BLuetoothDevice object
+
+
+                        //mChatService = new BluetoothPrintDriver(this, mHandler);
+
+                        // Get the BLuetoothDevice object
                         // BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mac);
                         // // Attempt to connect to the device
-                        // mChatService.connect(device);
+                        // BluetoothPrintDriver.connect(device);
 
                         // if(BluetoothPrintDriver.IsNoConnection()){
-                        //     return;
+                        //     callbackContext.success("Could not connect to " + mac);
                         // }else{
                         //     //BluetoothPrintDriver.StatusInquiry();
+                        //     // BluetoothPrintDriver.Begin();
+
+                        //     // String tmpContent = msg;
+
+                        //     // BluetoothPrintDriver.BT_Write(tmpContent);
+                        //     // BluetoothPrintDriver.BT_Write("\r");
+
+                        //     // BluetoothPrintDriver.LF();
+                        //     // BluetoothPrintDriver.LF();
+
+
                         //     BluetoothPrintDriver.Begin();
-
-                        //     String tmpContent = msg;
-
-                        //     BluetoothPrintDriver.BT_Write(tmpContent);
-                        //     BluetoothPrintDriver.BT_Write("\r");
-
                         //     BluetoothPrintDriver.LF();
                         //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.SetAlignMode((byte)1);//¾ÓÖÐ
+                        //     BluetoothPrintDriver.SetLineSpacing((byte)50);  
+                        //     BluetoothPrintDriver.SetFontEnlarge((byte)0x05);//±¶¸ß£¬±¶¿í        
+                        //     BluetoothPrintDriver.BT_Write(tmpString1);
+                            
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.LF();
+
+                        //     BluetoothPrintDriver.SetAlignMode((byte)0);//×ó¶ÔÆë     
+                        //     BluetoothPrintDriver.SetFontEnlarge((byte)0x00);//Ä¬ÈÏ¿í¶È¡¢Ä¬ÈÏ¸ß¶È
+                        //     BluetoothPrintDriver.BT_Write(tmpString2);
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.BT_Write(tmpString3);
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.BT_Write(tmpString4);
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.BT_Write(tmpString12);
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.BT_Write(tmpString5);
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.BT_Write(tmpString12);
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.BT_Write(tmpString6);
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.BT_Write(tmpString7);
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.BT_Write(tmpString12);
+                        //     BluetoothPrintDriver.LF();
+                        //     BluetoothPrintDriver.BT_Write(tmpString8);
+                        //     BluetoothPrintDriver.LF();
+
 
                         //     Thread.sleep(500);
                         //     callbackContext.success("Stampa terminata");
