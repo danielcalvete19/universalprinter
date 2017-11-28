@@ -34,7 +34,7 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
         if (action.equals("print")) {
             try {
                 String mac = args.getString(0);
-                String textPrint = args.getJSONArray(1);
+                JSONArray textPrint = args.getJSONArray(1);
                 sendData(callbackContext, mac, textPrint);
             } catch (IOException e) {
                 Log.e(LOG_TAG, e.getMessage());
