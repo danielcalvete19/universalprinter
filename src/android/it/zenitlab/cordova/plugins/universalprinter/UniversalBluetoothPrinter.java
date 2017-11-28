@@ -77,8 +77,8 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
 
                                 String tmpString1 = "GRUPO GIRALDO SAS";
                                 String tmpString2 = "Nit: 900.338.568-8";
-                                String tmpString3 = "Tel: (572) 4471825 / (572) 6684493";
-                                String tmpString4 = "Dire: Cra 5 Norte # 46BN - 31, Cali";
+                                String tmpString3 = "Tel: (572)4471825 /(572)6684493";
+                                String tmpString4 = "Dir: Cra 5 Nrt # 46BN-31, Cali";
                                 String tmpString5 = "Vendedor: VENDEDOR GENERAL -";
                                 String tmpString6 = "Fecha: 2017-10-06 11:59";
                                 String tmpString7 = "Tercero/Cliente: BASTO FABIAN";
@@ -94,8 +94,8 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
                                 BluetoothPrintDriver.AddAlignMode((byte)1);
-                                BluetoothPrintDriver.SetLineSpace((byte)50);    
-                                BluetoothPrintDriver.SetZoom((byte)0x05);        
+                                BluetoothPrintDriver.SetLineSpace((byte)30);    
+                                BluetoothPrintDriver.SetZoom((byte)0x10);        
                                 BluetoothPrintDriver.ImportData(tmpString1);
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
@@ -133,6 +133,9 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
                                 BluetoothPrintDriver.ImportData(tmpString6);
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
