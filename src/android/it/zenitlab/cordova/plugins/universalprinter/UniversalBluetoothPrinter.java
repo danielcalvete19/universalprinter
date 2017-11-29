@@ -253,27 +253,30 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.AddAlignMode((byte)0);
 
                                     for (int i=0; i < arrayTributario.length(); i++) {
                                         tributario = arrayTributario.getJSONObject(i);
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+
                                         BluetoothPrintDriver.AddAlignMode((byte)0);
-                                        BluetoothPrintDriver.ImportData("Porcentaje: " + tributario.getString("porcentaje") + " VLR_BASE: " + tributario.getString("valor_base"));
+                                        BluetoothPrintDriver.ImportData("%: " + tributario.getString("porcentaje") + " VLR_BASE: " + tributario.getString("valor_base"));
                                         BluetoothPrintDriver.LF();
                                         BluetoothPrintDriver.excute();
                                         BluetoothPrintDriver.ClearData();
                                         BluetoothPrintDriver.AddAlignMode((byte)2);
                                         BluetoothPrintDriver.ImportData("VLR_IMPUESTO: " + tributario.getString("valor_impuesto"));
-                                        BluetoothPrintDriver.LF();
-                                        BluetoothPrintDriver.excute();
-                                        BluetoothPrintDriver.ClearData();
+
                                         BluetoothPrintDriver.LF();
                                         BluetoothPrintDriver.excute();
                                         BluetoothPrintDriver.ClearData();
                                     }
+
+                                    BluetoothPrintDriver.ImportData(lineaDelgada);
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
                                     
                                 }
 
@@ -294,7 +297,51 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData("Ciudad: " + summaryShipping.getString("ciudad")); 
+                                BluetoothPrintDriver.ImportData("Ciudad: " + summaryShipping.getString("ciudad"));
+
+                                if(!textPrint.isNull("resolucion")){
+
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData(); 
+
+                                    BluetoothPrintDriver.ImportData(lineaDelgada);
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+
+                                    BluetoothPrintDriver.AddAlignMode((byte)1); 
+                                    BluetoothPrintDriver.ImportData("RESOLUCION");
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.AddAlignMode((byte)0);
+                                    BluetoothPrintDriver.ImportData("No.: " + summaryResolution.getString("numero") + " " + summaryResolution.getString("fecha"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData("Factura: " + summaryResolution.getString("prefijo") + "-" + summaryResolution.getString("minimo") + " al " + summaryResolution.getString("prefijo") + "-" + summaryResolution.getString("maximo"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.AddAlignMode((byte)1);
+                                    BluetoothPrintDriver.ImportData("SOMOS AUTORRETENEDORES EN RENTA Y CREE RESOL. 06224");
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData("JULIO 25 DE 2013");
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData("GRACIAS POR SU COMPRA");
+
+                                }
 
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
