@@ -84,13 +84,13 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 summaryCart = textPrint.getJSONObject("canasta");
                                 summaryShipping = textPrint.getJSONObject("envio");
 
-                                if(!textPrint.isNull("resolucion")){
+                                try{
+                                    arrayTributario = textPrint.getJSONArray("tributaria");
                                     summaryResolution = textPrint.getJSONObject("resolucion");
+                                }catch (Exception e){
+
                                 }
 
-                                if(!textPrint.isNull("tributaria")){
-                                    summaryResolution = textPrint.getJSONObject("tributaria");
-                                }
                                 
                                 String lineaDelgada = "--------------------------------";
 
