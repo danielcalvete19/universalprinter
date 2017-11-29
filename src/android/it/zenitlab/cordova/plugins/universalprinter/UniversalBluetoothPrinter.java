@@ -174,6 +174,8 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
 
                                 for (int i=0; i < arrayProducts.length(); i++) {
                                     product = arrayProducts.getJSONObject(i);
+                                    BluetoothPrintDriver.AddAlignMode((byte)0);
+                                    BluetoothPrintDriver.AddBold((byte)0x00);
                                     BluetoothPrintDriver.ImportData("Item: " + product.getString("nombre"));
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
@@ -181,15 +183,20 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("Cod: " + product.getString("codigo") + " U.M.: " + product.getString("medida") + "");
+                                    BluetoothPrintDriver.ImportData("Cod: " + product.getString("codigo") + " U.M.: " + product.getString("medida") + " Q: " + product.getString("cantidad"));
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
-                                    //BluetoothPrintDriver.ImportData("Vr.Und: " + product.getString("precioUnitario") + " Total: " + product.getString("subtotal"));
-                                    BluetoothPrintDriver.ImportData("Vr.Und: $9,999,999" + " Total: $9,999,999");
+                                    BluetoothPrintDriver.AddAlignMode((byte)2);
+                                    BluetoothPrintDriver.ImportData("Vr.Und: " + product.getString("precioUnitario"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.AddBold((byte)0x01);
+                                    BluetoothPrintDriver.ImportData("Total: " + product.getString("subtotal"));
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
