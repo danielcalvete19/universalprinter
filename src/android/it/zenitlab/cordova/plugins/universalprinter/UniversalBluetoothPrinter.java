@@ -29,12 +29,12 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
     }
 
     @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, JSONObject args, CallbackContext callbackContext) throws JSONException {
 
         if (action.equals("print")) {
             try {
                 String mac = args.getString(0);
-                JSONArray textPrint = args.getJSONArray(1);
+                JSONObject textPrint = args.getJSONObject(1);
                 sendData(callbackContext, mac, textPrint);
             } catch (IOException e) {
                 Log.e(LOG_TAG, e.getMessage());
@@ -48,7 +48,7 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
     /*
      * This will send data to be printed by the bluetooth printer
      */
-    void sendData(final CallbackContext callbackContext, final String mac, final JSONArray textPrint) throws IOException {
+    void sendData(final CallbackContext callbackContext, final String mac, final JSONObject textPrint) throws IOException {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -76,12 +76,16 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 // BluetoothPrintDriver.excute();
                                 // BluetoothPrintDriver.ClearData();
 
-                                JSONArray arrayProducts = new JSONArray();
-                                JSONObject product, summaryOrder, summaryCart, summaryShipping = new JSONObject();
-                                summaryOrder = textPrint.getJSONObject(0);
-                                arrayProducts = textPrint.getJSONArray(1);
-                                summaryCart = textPrint.getJSONObject(2);
-                                summaryShipping = textPrint.getJSONObject(3);
+                                JSONArray arrayProducts, arrayTributario = new JSONArray();
+                                JSONObject product, summaryOrder, summaryCart, summaryShipping, summaryResolution = new JSONObject();
+
+                                summaryOrder = textPrint.getJSONObject("general");
+                                arrayProducts = textPrint.getJSONArray("productos");
+                                summaryCart = textPrint.getJSONObject("canasta");
+                                summaryShipping = textPrint.getJSONObject("envio");
+
+                                arrayTributario = textPrint.getJSONArray("tributaria");
+                                summaryResolution = textPrint.getJSONObject("resolucion");
 
                                 String lineaDelgada = "--------------------------------";
 
@@ -180,18 +184,15 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("Cod: " + product.getString("codigo") + " U.M.: " + product.getString("medida") + " Q: " + product.getString("cantidad"));
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData("Codigo: " + product.getString("codigo") + " U.M.: " + product.getString("medida"));
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
                                     BluetoothPrintDriver.AddAlignMode((byte)2);
-                                    BluetoothPrintDriver.ImportData("Vr.Und: " + product.getString("precioUnitario"));
+                                    BluetoothPrintDriver.ImportData("Cant: " + product.getString("cantidad") + " Vr.Und: " + product.getString("precioUnitario"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
