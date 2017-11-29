@@ -211,7 +211,7 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
 
                                 BluetoothPrintDriver.AddAlignMode((byte)2);
 
-                                if(summaryResolution.length() > 0){
+                                if(!textPrint.isNull("resolucion")){
                                     BluetoothPrintDriver.ImportData("Vta Gravada: " + summaryCart.getString("subtotal"));
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
@@ -247,7 +247,7 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
 
-                                if(summaryResolution.length() > 0 && arrayTributario.length() > 0){
+                                if(!textPrint.isNull("resolucion") && !textPrint.isNull("tributaria")){
                                     BluetoothPrintDriver.AddAlignMode((byte)1); 
                                     BluetoothPrintDriver.ImportData("INFORMACION TRIBUTARIA");
                                     BluetoothPrintDriver.LF();
