@@ -77,16 +77,21 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 // BluetoothPrintDriver.ClearData();
 
                                 JSONArray arrayProducts, arrayTributario = new JSONArray();
-                                JSONObject product, summaryOrder, summaryCart, summaryShipping, summaryResolution = new JSONObject();
+                                JSONObject product, summaryOrder, summaryCart, summaryShipping, summaryResolution, tributario = new JSONObject();
 
                                 summaryOrder = textPrint.getJSONObject("general");
                                 arrayProducts = textPrint.getJSONArray("productos");
                                 summaryCart = textPrint.getJSONObject("canasta");
                                 summaryShipping = textPrint.getJSONObject("envio");
 
-                                arrayTributario = textPrint.getJSONArray("tributaria");
-                                summaryResolution = textPrint.getJSONObject("resolucion");
+                                try{
+                                    arrayTributario = textPrint.getJSONArray("tributaria");
+                                    summaryResolution = textPrint.getJSONObject("resolucion");
+                                }catch (Exception e){
 
+                                }
+
+                                
                                 String lineaDelgada = "--------------------------------";
 
                                 BluetoothPrintDriver.Begin();
@@ -204,15 +209,33 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                     BluetoothPrintDriver.ImportData(lineaDelgada);
                                 }
 
-                                // BluetoothPrintDriver.ImportData("SUBTOTAL: " + summaryCart.getString("subtotal"));
-                                // BluetoothPrintDriver.LF();
-                                // BluetoothPrintDriver.excute();
-                                // BluetoothPrintDriver.ClearData();
-                                // BluetoothPrintDriver.LF();
-                                // BluetoothPrintDriver.excute();
-                                // BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.AddBold((byte)0x01);
                                 BluetoothPrintDriver.AddAlignMode((byte)2);
+
+                                if(summaryResolution.length()){
+                                    BluetoothPrintDriver.ImportData("Vta Gravada: " + summaryCart.getString("subtotal"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData("IVA: " + summaryCart.getString("iva"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData("IMPOCONSUMO: " + summaryCart.getString("impoconsumo"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                }
+
+                                BluetoothPrintDriver.AddBold((byte)0x01);
                                 BluetoothPrintDriver.ImportData("VALOR TOTAL: " + summaryCart.getString("valortotal"));
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
@@ -223,6 +246,36 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
+
+                                if(summaryResolution.length() && arrayTributario.length()){
+                                    BluetoothPrintDriver.AddAlignMode((byte)1); 
+                                    BluetoothPrintDriver.ImportData("INFORMACION TRIBUTARIA");
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.AddAlignMode((byte)0);
+
+                                    for (int i=0; i < arrayTributario.length(); i++) {
+                                        tributario = arrayTributario.getJSONObject(i);
+                                        BluetoothPrintDriver.AddAlignMode((byte)0);
+                                        BluetoothPrintDriver.ImportData("Porcentaje: " + tributario.getString("porcentaje") + " VLR_BASE: " + tributario.getString("valor_base"));
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.AddAlignMode((byte)2);
+                                        BluetoothPrintDriver.ImportData("VLR_IMPUESTO: " + tributario.getString("valor_impuesto"));
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                    }
+                                    
+                                }
 
                                 BluetoothPrintDriver.AddAlignMode((byte)1); 
                                 BluetoothPrintDriver.ImportData("INFORMACION DE DESPACHO");
