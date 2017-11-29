@@ -29,7 +29,7 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
     }
 
     @Override
-    public boolean execute(String action, JSONObject args, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
         if (action.equals("print")) {
             try {
