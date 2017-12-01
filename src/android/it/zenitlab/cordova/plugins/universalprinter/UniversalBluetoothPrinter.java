@@ -102,7 +102,11 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.AddAlignMode((byte)1);
                                 BluetoothPrintDriver.SetLineSpace((byte)20);    
                                 BluetoothPrintDriver.SetZoom((byte)0x01);
-                                BluetoothPrintDriver.AddBold((byte)0x01);        
+                                BluetoothPrintDriver.AddBold((byte)0x01);
+                                BluetoothPrintDriver.ImportData(summaryOrder.getString("RazonSocial"));        
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
                                 BluetoothPrintDriver.ImportData(summaryOrder.getString("NombreEmpresa"));
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
@@ -126,10 +130,6 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
                                 BluetoothPrintDriver.ImportData(summaryOrder.getString("Direccion"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("VendedorNombre"));
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
@@ -174,6 +174,10 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
                                 BluetoothPrintDriver.ImportData(summaryOrder.getString("Contacto"));
+                                BluetoothPrintDriver.LF();
+                                BluetoothPrintDriver.excute();
+                                BluetoothPrintDriver.ClearData();
+                                BluetoothPrintDriver.ImportData(summaryOrder.getString("VendedorNombre"));
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
                                 BluetoothPrintDriver.ClearData();
@@ -275,32 +279,25 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                     
                                 }
 
-                                BluetoothPrintDriver.AddAlignMode((byte)1); 
-                                BluetoothPrintDriver.ImportData("INFORMACION DE DESPACHO");
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.AddAlignMode((byte)0);
-                                BluetoothPrintDriver.ImportData("Direccion: " + summaryShipping.getString("direccion"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData("Telefono: " + summaryShipping.getString("telefono"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData("Ciudad: " + summaryShipping.getString("ciudad"));
-
-                                if(!textPrint.isNull("resolucion")){
-
-                                    String numeroRes = summaryResolution.getString("numero");
-                                    String fechaRes = summaryResolution.getString("fecha");
-                                    String prefRes = summaryResolution.getString("prefijo");
-                                    String minRes = summaryResolution.getString("minimo");
-                                    String maxRes = summaryResolution.getString("maximo");
+                                if(textPrint.isNull("resolucion")){
+                                    BluetoothPrintDriver.AddAlignMode((byte)1); 
+                                    BluetoothPrintDriver.ImportData("INFORMACION DE DESPACHO");
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.AddAlignMode((byte)0);
+                                    BluetoothPrintDriver.ImportData("Direccion: " + summaryShipping.getString("direccion"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData("Telefono: " + summaryShipping.getString("telefono"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData("Ciudad: " + summaryShipping.getString("ciudad"));
 
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
@@ -310,6 +307,15 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
+                                }
+
+                                if(!textPrint.isNull("resolucion")){
+
+                                    String numeroRes = summaryResolution.getString("numero");
+                                    String fechaRes = summaryResolution.getString("fecha");
+                                    String prefRes = summaryResolution.getString("prefijo");
+                                    String minRes = summaryResolution.getString("minimo");
+                                    String maxRes = summaryResolution.getString("maximo");
 
                                     BluetoothPrintDriver.AddAlignMode((byte)1); 
                                     BluetoothPrintDriver.ImportData("RESOLUCION");
