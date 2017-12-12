@@ -197,7 +197,7 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("Cant: " + product.getString("cantidad") + " Vr.Und: " + product.getString("precioUnitario"));
+                                    BluetoothPrintDriver.ImportData("Cant: " + product.getString("cantidad") + " Vr.Unt: " + product.getString("precioUnitario"));
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
