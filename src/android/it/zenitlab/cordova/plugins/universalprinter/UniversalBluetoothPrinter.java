@@ -96,248 +96,320 @@ public class UniversalBluetoothPrinter extends CordovaPlugin {
                                 String lineaDelgada = "--------------------------------";
 
                                 BluetoothPrintDriver.Begin();
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.AddAlignMode((byte)1);
-                                BluetoothPrintDriver.SetLineSpace((byte)20);    
-                                BluetoothPrintDriver.SetZoom((byte)0x01);
-                                BluetoothPrintDriver.AddBold((byte)0x01);
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("RazonSocial"));        
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("NombreEmpresa"));
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-
-                                BluetoothPrintDriver.AddAlignMode((byte)0);       
-                                BluetoothPrintDriver.SetZoom((byte)0x00);
-                                BluetoothPrintDriver.AddBold((byte)0x00);
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("Nit"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("Telefonos"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("Direccion"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(lineaDelgada);
-
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-
-                                BluetoothPrintDriver.AddAlignMode((byte)1);
-                                BluetoothPrintDriver.SetLineSpace((byte)10);    
-                                BluetoothPrintDriver.SetZoom((byte)0x01);        
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("PedidoNro"));
-
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-
-
-                                BluetoothPrintDriver.AddAlignMode((byte)0);       
-                                BluetoothPrintDriver.SetZoom((byte)0x00);
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("Fecha"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("Tercero"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("TerceroNit"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData(); //M.pago cantidad Q:
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("MedioPago"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("Contacto"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(summaryOrder.getString("VendedorNombre"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.ImportData(lineaDelgada);
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-
-                                for (int i=0; i < arrayProducts.length(); i++) {
-                                    product = arrayProducts.getJSONObject(i);
-                                    BluetoothPrintDriver.AddAlignMode((byte)0);
-                                    BluetoothPrintDriver.ImportData("Item: " + product.getString("nombre"));
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("Codigo: " + product.getString("codigo") + " U.M.: " + product.getString("medida"));
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("Cant: " + product.getString("cantidad") + " Vr.Unt: " + product.getString("precioUnitario"));
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.AddAlignMode((byte)2);
-                                    BluetoothPrintDriver.AddBold((byte)0x01);
-                                    BluetoothPrintDriver.ImportData("Total: " + product.getString("subtotal"));
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.AddBold((byte)0x00);
-                                    BluetoothPrintDriver.ImportData(lineaDelgada);
-                                }
-
-                                BluetoothPrintDriver.AddAlignMode((byte)2);
 
                                 if(!textPrint.isNull("resolucion")){
-                                    BluetoothPrintDriver.ImportData("Vta Gravada: " + summaryCart.getString("subtotal"));
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("IVA: " + summaryCart.getString("iva"));
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("IMPOCONSUMO: " + summaryCart.getString("impoconsumo"));
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                }
 
-                                BluetoothPrintDriver.AddBold((byte)0x01);
-                                BluetoothPrintDriver.ImportData("VALOR TOTAL: " + summaryCart.getString("valortotal"));
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-                                BluetoothPrintDriver.AddBold((byte)0x00);
-                                BluetoothPrintDriver.ImportData(lineaDelgada);
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.AddAlignMode((byte)1);
+                                    BluetoothPrintDriver.SetLineSpace((byte)20);    
+                                    BluetoothPrintDriver.SetZoom((byte)0x01);
+                                    BluetoothPrintDriver.AddBold((byte)0x01);
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("RazonSocial"));        
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("NombreEmpresa"));
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
 
-                                BluetoothPrintDriver.LF();
-                                BluetoothPrintDriver.excute();
-                                BluetoothPrintDriver.ClearData();
-
-                                if(!textPrint.isNull("resolucion") && !textPrint.isNull("tributaria")){
-                                    BluetoothPrintDriver.AddAlignMode((byte)1); 
-                                    BluetoothPrintDriver.ImportData("INFORMACION TRIBUTARIA");
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
 
-                                    for (int i=0; i < arrayTributario.length(); i++) {
-                                        tributario = arrayTributario.getJSONObject(i);
+                                    BluetoothPrintDriver.AddAlignMode((byte)0);       
+                                    BluetoothPrintDriver.SetZoom((byte)0x00);
+                                    BluetoothPrintDriver.AddBold((byte)0x00);
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("Nit"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("Telefonos"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("Direccion"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(lineaDelgada);
+
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+
+                                    BluetoothPrintDriver.AddAlignMode((byte)1);
+                                    BluetoothPrintDriver.SetLineSpace((byte)10);    
+                                    BluetoothPrintDriver.SetZoom((byte)0x01);        
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("PedidoNro"));
+
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+
+
+                                    BluetoothPrintDriver.AddAlignMode((byte)0);       
+                                    BluetoothPrintDriver.SetZoom((byte)0x00);
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("Fecha"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("Tercero"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("TerceroNit"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData(); //M.pago cantidad Q:
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("MedioPago"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("Contacto"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("VendedorNombre"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(lineaDelgada);
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+
+                                    for (int i=0; i < arrayProducts.length(); i++) {
+                                        product = arrayProducts.getJSONObject(i);
+                                        BluetoothPrintDriver.AddAlignMode((byte)0);
+                                        BluetoothPrintDriver.ImportData("Item: " + product.getString("nombre"));
                                         BluetoothPrintDriver.LF();
                                         BluetoothPrintDriver.excute();
                                         BluetoothPrintDriver.ClearData();
-
-                                        BluetoothPrintDriver.AddAlignMode((byte)0);
-                                        BluetoothPrintDriver.ImportData("%: " + tributario.getString("porcentaje") + " VLR_BASE: " + tributario.getString("valor_base"));
+                                        BluetoothPrintDriver.ImportData("Codigo: " + product.getString("codigo") + " U.M.: " + product.getString("medida"));
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.ImportData("Cant: " + product.getString("cantidad") + " Vr.Unt: " + product.getString("precioUnitario"));
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
                                         BluetoothPrintDriver.LF();
                                         BluetoothPrintDriver.excute();
                                         BluetoothPrintDriver.ClearData();
                                         BluetoothPrintDriver.AddAlignMode((byte)2);
-                                        BluetoothPrintDriver.ImportData("VLR_IMPUESTO: " + tributario.getString("valor_impuesto"));
+                                        BluetoothPrintDriver.AddBold((byte)0x01);
+                                        BluetoothPrintDriver.ImportData("Total: " + product.getString("subtotal"));
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.AddBold((byte)0x00);
+                                        BluetoothPrintDriver.ImportData(lineaDelgada);
+                                    }
 
+                                    BluetoothPrintDriver.AddAlignMode((byte)2);
+
+                                    if(!textPrint.isNull("resolucion")){
+                                        BluetoothPrintDriver.ImportData("Vta Gravada: " + summaryCart.getString("subtotal"));
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.ImportData("IVA: " + summaryCart.getString("iva"));
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.ImportData("IMPOCONSUMO: " + summaryCart.getString("impoconsumo"));
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
                                         BluetoothPrintDriver.LF();
                                         BluetoothPrintDriver.excute();
                                         BluetoothPrintDriver.ClearData();
                                     }
 
+                                    BluetoothPrintDriver.AddBold((byte)0x01);
+                                    BluetoothPrintDriver.ImportData("VALOR TOTAL: " + summaryCart.getString("valortotal"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.AddBold((byte)0x00);
+                                    BluetoothPrintDriver.ImportData(lineaDelgada);
+
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+
+                                    if(!textPrint.isNull("resolucion") && !textPrint.isNull("tributaria")){
+                                        BluetoothPrintDriver.AddAlignMode((byte)1); 
+                                        BluetoothPrintDriver.ImportData("INFORMACION TRIBUTARIA");
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+
+                                        for (int i=0; i < arrayTributario.length(); i++) {
+                                            tributario = arrayTributario.getJSONObject(i);
+                                            BluetoothPrintDriver.LF();
+                                            BluetoothPrintDriver.excute();
+                                            BluetoothPrintDriver.ClearData();
+
+                                            BluetoothPrintDriver.AddAlignMode((byte)0);
+                                            BluetoothPrintDriver.ImportData("%: " + tributario.getString("porcentaje") + " VLR_BASE: " + tributario.getString("valor_base"));
+                                            BluetoothPrintDriver.LF();
+                                            BluetoothPrintDriver.excute();
+                                            BluetoothPrintDriver.ClearData();
+                                            BluetoothPrintDriver.AddAlignMode((byte)2);
+                                            BluetoothPrintDriver.ImportData("VLR_IMPUESTO: " + tributario.getString("valor_impuesto"));
+
+                                            BluetoothPrintDriver.LF();
+                                            BluetoothPrintDriver.excute();
+                                            BluetoothPrintDriver.ClearData();
+                                        }
+
+                                        BluetoothPrintDriver.ImportData(lineaDelgada);
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        
+                                    }
+
+                                    if(textPrint.isNull("resolucion")){
+                                        BluetoothPrintDriver.AddAlignMode((byte)1); 
+                                        BluetoothPrintDriver.ImportData("INFORMACION DE DESPACHO");
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.AddAlignMode((byte)0);
+                                        BluetoothPrintDriver.ImportData("Direccion: " + summaryShipping.getString("direccion"));
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.ImportData("Telefono: " + summaryShipping.getString("telefono"));
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.ImportData("Ciudad: " + summaryShipping.getString("ciudad"));
+                                    }
+
+                                    if(!textPrint.isNull("resolucion")){
+
+                                        String numeroRes = summaryResolution.getString("numero");
+                                        String fechaRes = summaryResolution.getString("fecha");
+                                        String prefRes = summaryResolution.getString("prefijo");
+                                        String minRes = summaryResolution.getString("minimo");
+                                        String maxRes = summaryResolution.getString("maximo");
+
+                                        BluetoothPrintDriver.AddAlignMode((byte)1); 
+                                        BluetoothPrintDriver.ImportData("RESOLUCION");
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.ImportData("No.: " + numeroRes + " " + fechaRes);
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.ImportData("Factura: " + prefRes + "-" + minRes + " al " + prefRes + "-" + maxRes);
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.ImportData("SOMOS AUTORRETENEDORES EN RENTA Y CREE RESOL. 06224");
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.ImportData("JULIO 25 DE 2013");
+                                        BluetoothPrintDriver.LF();
+                                        BluetoothPrintDriver.excute();
+                                        BluetoothPrintDriver.ClearData();
+                                        BluetoothPrintDriver.ImportData("GRACIAS POR SU COMPRA");
+
+                                    }
+
+                                }else{
+
+                                    BluetoothPrintDriver.AddAlignMode((byte)1);
+                                    BluetoothPrintDriver.SetLineSpace((byte)10);    
+                                    BluetoothPrintDriver.SetZoom((byte)0x01);        
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("PedidoNro"));
+
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+
+
+                                    BluetoothPrintDriver.AddAlignMode((byte)0);       
+                                    BluetoothPrintDriver.SetZoom((byte)0x00);
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("Fecha"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("Tercero"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("VendedorNombre"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(summaryOrder.getString("VendedorTelefono"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.ImportData(lineaDelgada);
+                                    BluetoothPrintDriver.AddAlignMode((byte)2);
+                                    BluetoothPrintDriver.AddBold((byte)0x01);
+                                    BluetoothPrintDriver.ImportData("VALOR TOTAL: " + summaryCart.getString("valortotal"));
+                                    BluetoothPrintDriver.LF();
+                                    BluetoothPrintDriver.excute();
+                                    BluetoothPrintDriver.ClearData();
+                                    BluetoothPrintDriver.AddBold((byte)0x00);
                                     BluetoothPrintDriver.ImportData(lineaDelgada);
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
-                                    
-                                }
-
-                                if(textPrint.isNull("resolucion")){
-                                    BluetoothPrintDriver.AddAlignMode((byte)1); 
-                                    BluetoothPrintDriver.ImportData("INFORMACION DE DESPACHO");
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.AddAlignMode((byte)0);
-                                    BluetoothPrintDriver.ImportData("Direccion: " + summaryShipping.getString("direccion"));
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("Telefono: " + summaryShipping.getString("telefono"));
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("Ciudad: " + summaryShipping.getString("ciudad"));
-                                }
-
-                                if(!textPrint.isNull("resolucion")){
-
-                                    String numeroRes = summaryResolution.getString("numero");
-                                    String fechaRes = summaryResolution.getString("fecha");
-                                    String prefRes = summaryResolution.getString("prefijo");
-                                    String minRes = summaryResolution.getString("minimo");
-                                    String maxRes = summaryResolution.getString("maximo");
 
                                     BluetoothPrintDriver.AddAlignMode((byte)1); 
-                                    BluetoothPrintDriver.ImportData("RESOLUCION");
+                                    BluetoothPrintDriver.ImportData("FECHA DE ENTREGA");
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("No.: " + numeroRes + " " + fechaRes);
+
+                                    BluetoothPrintDriver.ImportData("____  /  ____   /  ____");
+
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("Factura: " + prefRes + "-" + minRes + " al " + prefRes + "-" + maxRes);
                                     BluetoothPrintDriver.LF();
                                     BluetoothPrintDriver.excute();
                                     BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("SOMOS AUTORRETENEDORES EN RENTA Y CREE RESOL. 06224");
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("JULIO 25 DE 2013");
-                                    BluetoothPrintDriver.LF();
-                                    BluetoothPrintDriver.excute();
-                                    BluetoothPrintDriver.ClearData();
-                                    BluetoothPrintDriver.ImportData("GRACIAS POR SU COMPRA");
+                                    BluetoothPrintDriver.ImportData("FAVOR REVISAR SU PEDIDO EN EL MOMENTO DE LA ENTREGA");
 
                                 }
+                                
+                                
 
                                 BluetoothPrintDriver.LF();
                                 BluetoothPrintDriver.excute();
